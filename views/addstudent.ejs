@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <%- include('./navbar.ejs') %>
+
+    <section>
+      <h2>add new student</h2>
+      <form action="/addstudent" method="post">
+        <div>
+          <label for="">teacher name</label>
+          <input type="text" name="name" id="" />
+        </div>
+        <div>
+          <label for="">teacher email</label>
+          <input type="email" name="email" id="" />
+        </div>
+        <div>
+          <label for="">phone number</label>
+          <input type="text" name="phone" id="" />
+        </div>
+        <div>
+          <label for="">teacher:</label>
+        <select name="teacherId" id="">
+            <option value="null" selected hidden> choose a teacher</option>
+            <% teachers.forEach(teacher => { %>
+                
+                <option value="<%= teacher._id %>"><%= teacher.name %></option>
+             
+            <% }) %>
+        </select>
+        </div>
+        <button type="submit">add</button>
+      </form>
+    </section>
+  </body>
+</html>

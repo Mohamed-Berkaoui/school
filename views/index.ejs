@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <%- include('./navbar.ejs') %>
+
+    <main>
+      <h2>teachers</h2>
+
+      <table border width="70%">
+        <tr>
+          <th>name</th>
+          <th>email</th>
+          <th>phone</th>
+          <th>salary</th>
+          <th>update</th>
+          <th>delete</th>
+        </tr>
+        <% teachers.forEach(teacher => { %>
+            <tr>
+                <td><%= teacher.name %></td>
+                <td><%= teacher.email %></td>
+                <td><%= teacher.phone %></td>
+                <td><%= teacher.salary %></td>
+                <td><button>update</button></td>
+                <td><button>delete</button></td>
+            </tr>
+         
+        <% }) %>
+      </table>
+    </main>
+
+
+    <hr>
+    <main>
+        <h2>students</h2>
+  
+        <table border width="70%">
+          <tr>
+            <th>name</th>
+            <th>email</th>
+            <th>phone</th>
+            <th>teacher name</th>
+            <th>update</th>
+            <th>delete</th>
+          </tr>
+          <% students.forEach(student => { %>
+              <tr>
+                  <td><%= student.name %></td>
+                  <td><%= student.email %></td>
+                  <td><%= student.phone %></td>
+                  <td><%= student.teacherId.name %></td>
+                  <td><button>update</button></td>
+                  <td><button>delete</button></td>
+              </tr>
+           
+          <% }) %>
+        </table>
+      </main>
+  </body>
+</html>
