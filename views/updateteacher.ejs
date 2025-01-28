@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <%- include('./navbar.ejs') %>
+
+    <section>
+      <h2>update  teacher</h2>
+      <form action="/update/teacher/<%= oldTeacher._id %>" method="post">
+        <div>
+          <label for="">teacher name</label>
+          <input type="text" name="name" id="" value="<%= oldTeacher.name %>"/>
+        </div>
+        <div>
+          <label for="">teacher email</label>
+          <input type="email" name="email" id="" value="<%= oldTeacher.email %>" readonly disabled />
+        </div>
+        <div>
+          <label for="">phone number</label>
+          <input type="number" name="phone" id=""  value="<%= oldTeacher.phone %>"/>
+        </div>
+        <div>
+          <label for="">salary</label>
+          <input type="number" name="salary" id="" min="0" value="<%= oldTeacher.salary %>" />
+        </div>
+        <button type="submit">update</button>
+      </form>
+    </section>
+  </body>
+</html>

@@ -49,10 +49,9 @@ app.use(express.static(__dirname + "/public"));
 
 app.get("/", async function (req, res) {
   const teachers = await TeacherModel.find();
-  const students = await StudentModel.find().populate('teacherId')
+  const students = await StudentModel.find().populate("teacherId");
 
-    res.render("index.ejs", { teachers, students });
-
+  res.render("index.ejs", { teachers, students });
 });
 
 app.get("/addteacher", function (req, res) {
@@ -82,6 +81,43 @@ app.post("/addstudent", async function (req, res) {
   } catch (error) {
     res.send({ status: "error", message: error.message });
   }
+});
+
+app.get("/update/teacher/:id", async function (req, res) {
+  try {
+    const oldTeacher = await TeacherModel.findById(req.params.id);
+    res.render("updateteacher.ejs", { oldTeacher });
+  } catch (error) {
+    res.send({ status: "error", message: error.message });
+  }
+});
+app.post("/update/teacher/:id", async function (req, res) {
+  try {
+    delete req.body.email;
+    await TeacherModel.findByIdAndUpdate(req.params.id, req.body);
+    res.redirect("/");
+  } catch (error) {
+    res.send({ status: "error", message: error.message });
+  }
+});
+
+app.get("/delete/teacher/:id", async function (req, res) {
+  try {
+    const hasStudents = await StudentModel.find({ teacherId: req.params.id });
+    if (!hasStudents.length) {
+      await TeacherModel.findByIdAndDelete(req.params.id);
+      res.redirect("/");
+      return;
+    }
+
+    res.redirect("/fail");
+  } catch (error) {
+    res.send({ status: "error", message: error.message });
+  }
+});
+
+app.get("/fail", function (req, res) {
+  res.render("fail.ejs");
 });
 
 app.listen(process.env.PORT, function () {
