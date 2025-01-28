@@ -57,8 +57,8 @@
           <td><%= student.email %></td>
           <td><%= student.phone %></td>
           <td><%= student.teacherId.name %></td>
-          <td><button>update</button></td>
-          <td><button>delete</button></td>
+          <td><a href="/update/student/<%= student._id %>"><button>update</button></a></td>
+          <td><a href="/delete/student/<%= student._id %>"><button>delete</button></a></td>
         </tr>
 
         <% }) %>
